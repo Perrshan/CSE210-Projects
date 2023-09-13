@@ -6,6 +6,23 @@ class Program
     {
         Console.WriteLine("Hello Prep1 World!");
 
+        //Prep 1 Assignment
+
+        //Get first name
+        Console.Write("What is your first name? ");
+        string firstName = Console.ReadLine();
+
+        //Get last name
+        Console.Write("What is your last name? ");
+        string lastName = Console.ReadLine();
+
+        //Print James Bond line
+        Console.WriteLine($"Your name is {lastName}, {firstName} {lastName}.");
+
+
+
+        /*Notes from Class Sept 13, 2023
+
         //String interpolation
         int myInt = 5;
         Console.WriteLine("my int equals" + myInt);
@@ -25,6 +42,7 @@ class Program
         {
             Console.WriteLine($"Hi there {name}");
         }
+        */
 
     }
 }
