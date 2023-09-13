@@ -4,19 +4,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Prep1 World!");
+        //Prep 1 Assignment.
 
-        //Prep 1 Assignment
-
-        //Get first name
+        //Get first name.
         Console.Write("What is your first name? ");
         string firstName = Console.ReadLine();
 
-        //Get last name
+        //Get last name.
         Console.Write("What is your last name? ");
         string lastName = Console.ReadLine();
 
-        //Print James Bond line
+        //Print James Bond line.
         Console.WriteLine($"Your name is {lastName}, {firstName} {lastName}.");
 
         //I did it!!!
