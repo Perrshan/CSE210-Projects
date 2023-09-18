@@ -9,33 +9,48 @@ class Program
 
         //Prep 3
         int guessNumber = -1;
+        bool done = false;
 
-        Random rnd = new Random();
-        int randomNumber = rnd.Next(1,100);
-
-        Console.WriteLine($"{randomNumber}");
-
-        while (randomNumber != guessNumber)
+        while (!done)
         {
-            Console.Write("Guess the number: ");
-            string guessNumberString = Console.ReadLine();
-            guessNumber = int.Parse(guessNumberString);
+            int count = 0;
+            Random rnd = new Random();
+            int randomNumber = rnd.Next(1,100);
+            while (randomNumber != guessNumber)
+            {
+                Console.Write("Guess the number: ");
+                string guessNumberString = Console.ReadLine();
+                guessNumber = int.Parse(guessNumberString);
 
-            if (guessNumber > randomNumber)
-            {
-                Console.WriteLine("You guessed too high!");
+                if (guessNumber > randomNumber)
+                {
+                    Console.WriteLine("You guessed too high!");
+                }
+                else if (guessNumber < randomNumber)
+                {
+                    Console.WriteLine("You guess too low!");
+                }
+                else
+                {
+                    Console.WriteLine("You guessed it!");
+                }
+                count++;
             }
-            else if (guessNumber < randomNumber)
+            Console.WriteLine($"It took you {count} tries!");
+            Console.Write("Do you want to play again? (y/n): ");
+            string donePlaying = Console.ReadLine();
+            if (donePlaying == "y")
             {
-                Console.WriteLine("You guess too low!");
+                Console.WriteLine("Good luck!");
             }
             else
             {
-                Console.WriteLine("You guessed it!");
+                Console.WriteLine("Thanks for playing!");
+                done = true;
             }
         }
 
-
+        /*
         //While loop
         var count = 0;
         while (count < 5)
@@ -70,6 +85,7 @@ class Program
         {
             Console.WriteLine($"i = {myInts[i]}");
         }
+        */
 
     }
 }
