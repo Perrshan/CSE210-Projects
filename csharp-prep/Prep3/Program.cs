@@ -8,27 +8,31 @@ class Program
 
 
         //Prep 3
-        
+        int guessNumber = -1;
 
-        Console.Write("Give me a random number: ");
-        String randomNumberString = Console.ReadLine();
-        int randomNumber = int.Parse(randomNumberString);
+        Random rnd = new Random();
+        int randomNumber = rnd.Next(1,100);
 
-        Console.Write("Guess the number: ");
-        string guessNumberString = Console.ReadLine();
-        int guessNumber = int.Parse(guessNumberString);
+        Console.WriteLine($"{randomNumber}");
 
-        if (guessNumber > randomNumber)
+        while (randomNumber != guessNumber)
         {
-            Console.WriteLine("You guessed too high!");
-        }
-        else if (guessNumber < randomNumber)
-        {
-            Console.WriteLine("You guess too low!");
-        }
-        else
-        {
-            Console.WriteLine("You guessed it!");
+            Console.Write("Guess the number: ");
+            string guessNumberString = Console.ReadLine();
+            guessNumber = int.Parse(guessNumberString);
+
+            if (guessNumber > randomNumber)
+            {
+                Console.WriteLine("You guessed too high!");
+            }
+            else if (guessNumber < randomNumber)
+            {
+                Console.WriteLine("You guess too low!");
+            }
+            else
+            {
+                Console.WriteLine("You guessed it!");
+            }
         }
 
 
