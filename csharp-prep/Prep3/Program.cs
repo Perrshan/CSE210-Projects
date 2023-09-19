@@ -4,15 +4,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Prep3 World!");
-
-
         //Prep 3
+
+        //Declare Variables.
         int guessNumber = -1;
         bool done = false;
 
+        //Outer Loop that checks if the player is done or not.
         while (!done)
         {
+
+            //Gets random number and asks the user to begin guessing. The inner loops has them continually guess until the
+            //correct number is guessed.
             int count = 0;
             Random rnd = new Random();
             int randomNumber = rnd.Next(1,100);
@@ -36,9 +39,12 @@ class Program
                 }
                 count++;
             }
+
+            //Tells the player how many guesses it took to find the correct answer and asks if they want to play again.
             Console.WriteLine($"It took you {count} tries!");
             Console.Write("Do you want to play again? (y/n): ");
             string donePlaying = Console.ReadLine();
+
             if (donePlaying == "y")
             {
                 Console.WriteLine("Good luck!");
