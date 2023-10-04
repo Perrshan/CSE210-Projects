@@ -1,9 +1,11 @@
 using System;
 
+//The Journal class makes the _entryList. Creates a Display, Save, and Load Method.
 public class Journal
 {
     public List<Entry> _entryList = new List<Entry>();
 
+    //Display each of the entries in the _entryList
     public void Display()
     {
         foreach (Entry entry in _entryList)
@@ -12,6 +14,7 @@ public class Journal
         }
     }
 
+    //Saves the entries into a user inputted file and calls a method to concatenate the entries for easy reading.
     public void Save(string fileName)
     {
         using (StreamWriter outputFile = new StreamWriter(fileName))
@@ -21,12 +24,12 @@ public class Journal
                 string fileLine;
                 fileLine = entry.Save();
 
-                // You can add text to the file with the WriteLine method
                 outputFile.WriteLine($"{fileLine}");
             }
         }
     }
 
+    //Reads the lines from a file and deconstructs the concatenated line to assign them to the Entry instances.
     public Journal Load(string fileName, Journal myJournal)
     {
         string[] lines = System.IO.File.ReadAllLines(fileName);
@@ -36,12 +39,13 @@ public class Journal
             Entry entry = new Entry();
             string[] parts = line.Split("~");
 
-            string promptLine = parts[0];
-            string dateLine = parts[1];
+            
+            string dateLine = parts[0];
+            string promptLine = parts[1];
             string entryLine = parts[2];
 
-            entry._prompt = promptLine;
             entry._date = dateLine;
+            entry._prompt = promptLine;
             entry._entry = entryLine;
 
             myJournal._entryList.Add(entry);

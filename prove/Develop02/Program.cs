@@ -3,45 +3,45 @@ using System.IO;
 
 class Program
 {
-    /*static bool RepeatedNumberCheck(List<int> randomInts, int randomInt)
+    //Displays the menu and the prompt to choose one of the options.
+    static void DisplayMenu()
     {
-        bool repeat;
+        Console.WriteLine("1: Write Entry");
+        Console.WriteLine("2: Display");
+        Console.WriteLine("3: Load");
+        Console.WriteLine("4: Save");
+        Console.WriteLine("5: Quit");
 
-        for (int i = 0; i < randomInts.Count; i++)
-        {
-            int number = randomInts[i];
+        Console.Write("Please choose one of the following options(1-5): ");
+    }
 
-            if(number == randomInt)
-            {
-                repeat = true;
-                return repeat;
-            }
-        }
-
-        repeat = false;
-        return repeat;
-        
-    }*/
-
+    //Main function.
     static void Main(string[] args)
     {
+        //Creates Variable for date.
         DateTime theCurrentTime = DateTime.Now;
         string dateText = theCurrentTime.ToShortDateString();
 
-        string responseString;
-        int responseInt;
+        //Creates the variable to go through the menu.
+        string menuResponseString;
+        int menuResponseInt;
 
-        /*List<int> randomInts = new List<int>();
-        randomInts.Add(-1);*/
+        //Creates rnd variable.
         Random rnd = new Random();
 
-        //bool repeat = true;
-        bool done = false;
+        //Creates variable where user will input their answer to the prompt.
+        string promptAnswer;
 
-        string answer;
+        //Creates myJournal variable.
         Journal myJournal = new Journal();
+
+        //Creates a variable for the file name they want to save it to.
         string fileName;
 
+        bool saveCheck = false;
+        string saveCheckResponse;
+
+        //Adds prompts to the prompt list.
         List<string> prompts = new List<string>();
         prompts.Add("Who was the most interesting person I interacted with today?");
         prompts.Add("What was the best part of my day?");
@@ -49,65 +49,105 @@ class Program
         prompts.Add("What was the strongest emotion I felt today?");
         prompts.Add("If I had one thing I could do over today, what would it be?");
 
-
+        //Creates While loop condition.
+        bool done = false;
 
         while (!done)
         {
+            //Assigns a random value to randomInt.
             int randomInt = rnd.Next(0, prompts.Count - 1);
-            //repeat = RepeatedNumberCheck(randomInts, randomInt);
-            //Console.WriteLine(randomInt);
 
-            //randomInts.Add(randomInt);
+            //Creates an entry variable.
             Entry entry = new Entry();
-            Console.WriteLine("1: Write Entry");
-            Console.WriteLine("2: Display");
-            Console.WriteLine("3: Load");
-            Console.WriteLine("4: Save");
-            Console.WriteLine("5: Quit");
 
-            Console.Write("Please choose one of the following options(1-5): ");
-            responseString = Console.ReadLine();
-            responseInt = int.Parse(responseString);
+            //Displays menu and creates a variable for their response.
+            DisplayMenu();
+            menuResponseString = Console.ReadLine();
 
-            switch(responseInt)
+            //Checks to see if the response can be converted into an int. If not makes response int 100 to trigger the default switch case.
+            try
             {
-                case 1:
-                entry._prompt = $"{prompts[randomInt]}"; //Need to make the prompt list
-                entry._date = $"{dateText}"; //actually do the pull date function
-                Console.WriteLine($"{prompts[randomInt]}"); //Print prompt for user to see
-                answer = Console.ReadLine(); //Get user answer
-                entry._entry = $"{answer}"; //Save answer in _entry
+                menuResponseInt = int.Parse(menuResponseString);
+            }
+            catch (FormatException)
+            {
+                menuResponseInt = 100;
+            }
 
-                myJournal._entryList.Add(entry); //Add entry to journal list
+            //Defines cases.
+            switch(menuResponseInt)
+            {
+
+                //Assigns variables to all Entry instances and gets the users response to the prompt. Adds Entry to the myJournal list.
+                case 1:
+                entry._date = $"{dateText}";
+                entry._prompt = $"{prompts[randomInt]}";
+                Console.WriteLine($"{prompts[randomInt]}");
+                promptAnswer = Console.ReadLine();
+                entry._entry = $"{promptAnswer}";
+
+                myJournal._entryList.Add(entry);
                 Console.WriteLine($"{myJournal._entryList}");
+
+                //Removes the used prompt so that there are no repeats.
+                prompts.RemoveAt(randomInt);
                 break;
 
+                //Clears Console for neatness and displays the myJournal list.
                 case 2:
-
+                Console.Clear();
                 myJournal.Display();
                 break;
 
+                //Asks the user for the file they want to load. Calls the load function.
                 case 3:
                 Console.Write("Enter the file you want to load: ");
                 fileName = Console.ReadLine();
 
                 myJournal = myJournal.Load(fileName, myJournal);
+                saveCheck = false;
                 break;
 
+                //Asks the user for the file they want to save their journal within. Calls the save function then clears the myJournal list.
                 case 4:
-
                 Console.Write("Enter the file you would like to save these entries within: ");
                 fileName = Console.ReadLine();
 
                 myJournal.Save(fileName);
 
                 myJournal._entryList.Clear();
+                saveCheck = true;
                 break;
 
+                //Changes the loop condition when user enters 5.
                 case 5:
-                done = true;
-                break;
+                if (saveCheck)
+                {
+                    done = true;
+                    Console.WriteLine("Thanks for Journaling!");
+                }
+                else
+                {
+                    Console.Write("Would you like to save your journal entries?(y/n) ");
+                    saveCheckResponse = Console.ReadLine();
+                    if (saveCheckResponse == "y")
+                    {
+                        Console.Write("Enter the file you would like to save these entries within: ");
+                        fileName = Console.ReadLine();
 
+                        myJournal.Save(fileName);
+                        done = true;
+                        Console.WriteLine("Thanks for Journaling!");
+                    }
+                    else
+                    {
+                        done = true;
+                        Console.WriteLine("Thanks for Journaling!");
+                    }
+                }
+                break;
+                
+                //If user enters an invalid switch value it will print error message and return to the top.
                 default:
                 Console.WriteLine("Invalid entry.");
                 break;

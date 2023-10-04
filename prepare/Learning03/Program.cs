@@ -26,7 +26,7 @@ class Program
     static void Main(string[] args)
     {
         List<int> randomInts = new List<int>();
-        int randomInt;
+        int randomInt = -1;
         Random rnd = new Random();
         bool repeat = true;
 
