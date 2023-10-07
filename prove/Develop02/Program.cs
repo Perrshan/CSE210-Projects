@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-//To exceed the requirements I added a try and catch to make sure that the user inputted a integer as to not crash the switch case.
+//To exceed the requirements I added a try and catch to make sure that the user inputted an integer so as to not crash the switch case.
 //I also added a saveCheck boolean variable to mimic what websites do when a user tries to exit before saving a file. 
 //To make sure that no prompt is used more than 1 time, I added code that removes the prompt from the prompts list after it was used.
 //I also added more prompts to the list along with the ones given in the abstraction.
