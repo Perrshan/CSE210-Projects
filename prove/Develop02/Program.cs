@@ -1,6 +1,11 @@
 using System;
 using System.IO;
 
+//To exceed the requirements I added a try and catch to make sure that the user inputted a integer as to not crash the switch case.
+//I also added a saveCheck boolean variable to mimic what websites do when a user tries to exit before saving a file. 
+//To make sure that no prompt is used more than 1 time, I added code that removes the prompt from the prompts list after it was used.
+//I also added more prompts to the list along with the ones given in the abstraction.
+
 class Program
 {
     //Displays the menu and the prompt to choose one of the options.
@@ -49,6 +54,15 @@ class Program
         prompts.Add("How did I see the hand of the Lord in my life today?");
         prompts.Add("What was the strongest emotion I felt today?");
         prompts.Add("If I had one thing I could do over today, what would it be?");
+        prompts.Add("What did I learn today? How can I apply this knowledge in the future?");
+        prompts.Add("What challenges did I face today? How did I overcome them? What can I learn from these experiences?");
+        prompts.Add("What did I do today that brought me joy or fulfillment? How can I incorporate more of these activities into my daily routine?");
+        prompts.Add("What was a moment of joy, delight, or contentment today?");
+        prompts.Add("What was a small detail I noticed today?");
+        prompts.Add("What was the weather like today?");
+        prompts.Add("What am I thankful for today?");
+        prompts.Add("What could I have done differently today?");
+        prompts.Add("How can I make tomorrow even better?");
 
         //Creates a boolean variable for the While loop condition.
         bool done = false;
