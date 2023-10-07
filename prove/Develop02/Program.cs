@@ -173,7 +173,7 @@ class Program
                 
                 //If user enters an invalid switch value it will print error message and return to the top.
                 default:
-                Console.WriteLine("Invalid entry.");
+                Console.WriteLine("Invalid entry. Please enter a number 1-5.");
                 break;
             }
         }
