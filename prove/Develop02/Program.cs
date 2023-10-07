@@ -18,30 +18,31 @@ class Program
     //Main function.
     static void Main(string[] args)
     {
-        //Creates Variable for date.
+        //Creates Datetime and string Variable for date.
         DateTime theCurrentTime = DateTime.Now;
         string dateText = theCurrentTime.ToShortDateString();
 
-        //Creates the variable to go through the menu.
+        //Creates the string and int variable to go through the menu and switch case.
         string menuResponseString;
         int menuResponseInt;
 
-        //Creates rnd variable.
+        //Creates a rnd Random variable.
         Random rnd = new Random();
 
-        //Creates variable where user will input their answer to the prompt.
+        //Creates a string variable where user will input their answer to the prompt.
         string promptAnswer;
 
-        //Creates myJournal variable.
+        //Creates a myJournal Journal variable.
         Journal myJournal = new Journal();
 
-        //Creates a variable for the file name they want to save it to.
+        //Creates a string variable for the file name they want to save it to.
         string fileName;
 
+        //Creates a boolean variable to check if the user has saved their entries.
         bool saveCheck = false;
         string saveCheckResponse;
 
-        //Adds prompts to the prompt list.
+        //Creates a List for the prompts, and adds prompts to that list.
         List<string> prompts = new List<string>();
         prompts.Add("Who was the most interesting person I interacted with today?");
         prompts.Add("What was the best part of my day?");
@@ -49,7 +50,7 @@ class Program
         prompts.Add("What was the strongest emotion I felt today?");
         prompts.Add("If I had one thing I could do over today, what would it be?");
 
-        //Creates While loop condition.
+        //Creates a boolean variable for the While loop condition.
         bool done = false;
 
         while (!done)
@@ -64,14 +65,14 @@ class Program
             DisplayMenu();
             menuResponseString = Console.ReadLine();
 
-            //Checks to see if the response can be converted into an int. If not makes response int 100 to trigger the default switch case.
+            //Checks to see if the response can be converted into an int. If not makes response int -1 to trigger the default switch case.
             try
             {
                 menuResponseInt = int.Parse(menuResponseString);
             }
             catch (FormatException)
             {
-                menuResponseInt = 100;
+                menuResponseInt = -1;
             }
 
             //Defines cases.
@@ -121,12 +122,15 @@ class Program
 
                 //Changes the loop condition when user enters 5.
                 case 5:
+
+                //If the saveCheck variable is False and the _entrylist is empty then it will ask the user if they would like to save before 
+                //quiting.
                 if (saveCheck)
                 {
                     done = true;
                     Console.WriteLine("Thanks for Journaling!");
                 }
-                else
+                else if (!saveCheck && myJournal._entryList.Count > 0)
                 {
                     Console.Write("Would you like to save your journal entries?(y/n) ");
                     saveCheckResponse = Console.ReadLine();
@@ -137,6 +141,7 @@ class Program
 
                         myJournal.Save(fileName);
                         done = true;
+                        Console.WriteLine("Your entries have been saved!");
                         Console.WriteLine("Thanks for Journaling!");
                     }
                     else
@@ -144,6 +149,11 @@ class Program
                         done = true;
                         Console.WriteLine("Thanks for Journaling!");
                     }
+                }
+                else
+                {
+                    done = true;
+                    Console.WriteLine("Thanks for Journaling!");
                 }
                 break;
                 

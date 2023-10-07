@@ -19,7 +19,7 @@ public class Entry
     //Creates a concatenated version of the entries for easy reading.
     public string Save()
     {
-        string fileLine = $"{_prompt} ~ {_date} ~ {_entry}";
+        string fileLine = $"{_prompt}~{_date}~{_entry}~";
         return fileLine;
     }
 }
