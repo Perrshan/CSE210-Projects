@@ -1,4 +1,4 @@
-// to exceed the requirements I added comments to my code, I added a way for the user to input their own scripture. I don't think I added any
+// to exceed the requirements I added comments to my code, and I added a way for the user to input their own scripture. I don't think I added any
 // more than that because this develop assignment really pushed me. I would love to talk with you sometime to learn more about how classes 
 // can interact with eachother.
 
