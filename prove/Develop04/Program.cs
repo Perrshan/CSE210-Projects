@@ -1,9 +1,9 @@
 using System;
 
-// I took a good amount of time to make sure that I used the correct encapsulation rules in my code. Each activity has their own attributes and 
-// behaviors and any shared attributes or behaviors were stored within the Activity class. I added a try/catch statement to make sure that the
-// duration entered was actually a integer. I also commented all of the more in depth code to make sure that it can easily be understood and I 
-// took the time to format the code to look neat and professional.
+// I took a good amount of time to make sure that I used the correct encapsulation rules in my code. Each activity has its own attributes
+// and behaviors and any shared attributes or behaviors were stored within the Activity class. I added a try/catch statement to make sure
+// that the duration entered was actually an integer. I also commented on all the more in-depth code to make sure that it could easily be
+// understood and I took the time to format the code to look neat and professional.
 
 class Program
 {
