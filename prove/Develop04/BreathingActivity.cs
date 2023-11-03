@@ -1,27 +1,20 @@
 class BreathingActivity: Activity{
 
-    public BreathingActivity() : base("Breathing", "This Activity will help you relax by walking through breathing in and out slowly. Clear your mind and focus on your breathing."){
+    // calls the base constructor and assigns the unique breathing _name and _description values
+    public BreathingActivity() : base("Breathing", 
+    "This Activity will help you relax by walking through breathing in and out slowly. Clear your mind and focus on your breathing."){
 
     }
 
     public void StartActivity(){
-        bool time = false;
+        DisplayBeginningMessages();
 
-        DisplayStartingMessage();
-        DisplayDescription();
-        SetDuration();
+        DateTime endTime = GetEndTime();
 
-        Console.Clear();
-        Console.WriteLine("Get ready...");
-        DisplayAnimation();
-        Console.WriteLine();
-
-        DateTime startTime = DateTime.Now;
-        DateTime futureTime = startTime.AddSeconds(_duration);
-
-        while(!time){
+        // repeats the breathing instructions until the endTime is reached
+        while(!_endTimeReached){
             DisplayBreathingInstructions();
-            time = CheckTime(futureTime);
+            SetEndTimeReached(CheckTime(endTime));
 
         }
         
@@ -29,38 +22,13 @@ class BreathingActivity: Activity{
         
     }
 
-    public void DisplayBreathingInstructions(){
-        int pauseTime = 1000;
-        int breathInTime  = 4;
-        int breathOutTime = 6;
-
+    // prints breath in and breath out with a countdown
+    private void DisplayBreathingInstructions(){
         Console.Write("Breath in... ");
-        while(breathInTime != 0){
-            Console.Write("\b");
-            Console.Write(breathInTime);
-            Pause(pauseTime);
-            
-            breathInTime --;
-        }
-
-        Console.Write("\b");
-        Console.Write(" ");
-        Console.WriteLine();
-
+        DisplayCountdown(4);
         Console.Write("Breath out... ");
-        while(breathOutTime != 0){
-            Console.Write("\b");
-            Console.Write(breathOutTime);
-            Pause(pauseTime);
-            
-            breathOutTime --;
-        }
-
-        Console.Write("\b");
-        Console.Write(" ");
+        DisplayCountdown(6);
         Console.WriteLine();
-        Console.WriteLine();
-
     }
 
 }
