@@ -5,7 +5,7 @@ class Activity{
     private int _duration;
     protected bool _endTimeReached = false;
 
-    // contructor to assign values to _name and _description
+    // constructor to assign values to _name and _description
     protected Activity(string name, string description){
         _name = name;
         _description = description;

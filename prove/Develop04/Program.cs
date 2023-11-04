@@ -20,6 +20,7 @@ class Program
     // main function
     static void Main(string[] args)
     {
+        Console.Clear();
         string menuResponse;
         bool done = false;
         while(!done){
@@ -54,6 +55,8 @@ class Program
                 // ends the while loop
                 case "4":
                 done = true;
+                Console.WriteLine("“We are what we think. All that we are arises with our thoughts. With our thoughts, we make the world.”");
+                Console.WriteLine("~Buddha");
                 break;
 
                 // default case if the user does not enter a string of "1-4"
