@@ -28,9 +28,9 @@ class Program
     static void Main(string[] args)
     {
         // use a double delimiter when trying to split up data from the super class and the sub class. After it is split you can then split it again.
-        var goal = new Goal();
-        var simple = new SimpleGoal();
+        
         var goals = new List<Goal>();
+        int lineNumber;
 
         Console.Clear();
         string menuResponse;
@@ -38,8 +38,13 @@ class Program
         bool done = false;
         while(!done){
 
+            int totalPoints = 0;
+
             Console.WriteLine();
-            goal.GetPoints();
+            foreach(Goal goalType in goals){
+                        totalPoints += goalType.GetPoints();
+                    }
+            Console.WriteLine($"You have {totalPoints} points.");
             Console.WriteLine();
 
             DisplayMenu();
@@ -53,49 +58,20 @@ class Program
                     DisplayGoalTypes();
                     goalTypeResponse = Console.ReadLine();
 
-                    string name;
-                    string description;
-                    int points;
-                    int totalTimes;
-                    int bonusPoints;
-
-
                     switch(goalTypeResponse){
 
                         case "1":
-                            var simpleGoal = simple.CreateSimpleGoal();
-                            goals.Add(simpleGoal);
+                            goals.Add(SimpleGoal.CreateSimpleGoal());
 
                         break;
 
                         case "2":
-                            Console.Write("What is the name of your goal? ");
-                            name = Console.ReadLine();
-                            Console.Write("What is a short description of it? ");
-                            description = Console.ReadLine();
-                            Console.Write("What is the amount of points associated with this goal? ");
-                            points = int.Parse(Console.ReadLine());
-                            
-                            var eternal = new EternalGoal(name, description, points);
-                            goals.Add(eternal);
+                            goals.Add(EternalGoal.CreateEternalGoal());
 
                         break;
 
                         case "3":
-                            Console.Write("What is the name of your goal? ");
-                            name = Console.ReadLine();
-                            Console.Write("What is a short description of it? ");
-                            description = Console.ReadLine();
-                            Console.Write("What is the amount of points associated with this goal? ");
-                            points = int.Parse(Console.ReadLine());
-                            Console.Write("How many times does this goal need to be accomplished for a bonus? ");
-                            totalTimes = int.Parse(Console.ReadLine());
-                            Console.Write("What is the bonus for accomplishing it that many times? ");
-                            bonusPoints = int.Parse(Console.ReadLine());
-
-                            
-                            var checklist = new ChecklistGoal(name, description, points, bonusPoints, totalTimes);
-                            goals.Add(checklist);
+                            goals.Add(ChecklistGoal.CreateChecklistGoal());
 
                         break;
 
@@ -108,9 +84,11 @@ class Program
 
                 // List Goals
                 case "2":
-
+                    lineNumber = 1;
                     foreach(Goal goalType in goals){
-                        goalType.DisplayGoals();
+                        Console.Write($"{lineNumber}. ");
+                        goalType.DisplayGoal();
+                        lineNumber++;
                     }
 
                 break;
@@ -127,6 +105,23 @@ class Program
 
                 // Record Event
                 case "5":
+                    if(goals.Count == 0){
+
+                        Console.WriteLine("You have no goals to record.");
+
+                    } else {
+                        lineNumber = 1;
+                        foreach(Goal goalType in goals){
+                            Console.Write($"{lineNumber}. ");
+                            goalType.DisplayGoalNames();
+                            lineNumber++;
+                        }
+
+                        Console.Write("Which goal did you accomplish? ");
+                        int iGoal = int.Parse(Console.ReadLine()) - 1;
+                        goals[iGoal].RecordEvent();
+                        
+                    }
 
                 break;
 

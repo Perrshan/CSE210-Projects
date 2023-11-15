@@ -1,25 +1,34 @@
 class EternalGoal : Goal{
-    private int _subpoints;
+    private int _possiblePoints;
+    private int _earnedPoints;
 
-    public EternalGoal(string name, string description, int subpoints) :base(name, description){
-        _subpoints = subpoints;
+    public EternalGoal(string name, string description, int possiblePoints) :base(name, description){
+        _possiblePoints = possiblePoints;
     }
 
-    public override void DisplayGoals(){
+    public override void DisplayGoal(){
 
         Console.WriteLine($"[ ] {_name} ({_description})");
     }
 
-    public EternalGoal CreateEternalGoal(){
+    public static EternalGoal CreateEternalGoal(){
         Console.Write("What is the name of your goal? ");
-        _name = Console.ReadLine();
+        string name = Console.ReadLine();
         Console.Write("What is a short description of it? ");
-        _description = Console.ReadLine();
+        string description = Console.ReadLine();
         Console.Write("What is the amount of points associated with this goal? ");
-        _subpoints = int.Parse(Console.ReadLine());
+        int possiblePoints = int.Parse(Console.ReadLine());
                             
-        var goal = new EternalGoal(_name, _description, _subpoints);
+        var goal = new EternalGoal(name, description, possiblePoints);
 
         return goal;
+    }
+
+    public override int GetPoints(){
+        return _earnedPoints;
+    }
+
+    public override void RecordEvent(){
+        _earnedPoints += _possiblePoints;
     }
 }

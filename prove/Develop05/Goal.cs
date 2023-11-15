@@ -1,23 +1,14 @@
 class Goal{
     protected string _name;
     protected string _description;
-    private int _points;
     
-    public Goal(){
-        _name = "blank";
-        _description = "blank";
-    }
     public Goal(string name, string description){
         _name = name;
         _description = description;
     }
 
-    public void GetPoints(){
-        Console.WriteLine($"You have {_points} points.");
-    }
-
-    public virtual void RecordEvent(){
-
+    public virtual int GetPoints(){
+        return 0;
     }
 
     public virtual bool IsComplete(){
@@ -32,11 +23,15 @@ class Goal{
 
     }
 
-    public virtual void DisplayGoals(){
-
+    public virtual void DisplayGoal(){
+    
     }
 
-    public void DisplayPoints(){
+    public void DisplayGoalNames(){
+        Console.WriteLine(_name);
+    }
+
+    public virtual void RecordEvent(){
 
     }
 
