@@ -1,4 +1,4 @@
-class Goal{
+abstract class Goal{
     protected string _name;
     protected string _description;
     
@@ -7,33 +7,17 @@ class Goal{
         _description = description;
     }
 
-    public virtual int GetPoints(){
-        return 0;
-    }
-
-    public virtual bool IsComplete(){
-        return true;
-    }
-
-    public void WriteFile(){
-
-    }
-
-    public void ReadFile(){
-
-    }
-
-    public virtual void DisplayGoal(){
-    
-    }
-
-    public void DisplayGoalNames(){
+    public void DisplayGoalName(){
         Console.WriteLine(_name);
     }
 
-    public virtual void RecordEvent(){
+    public abstract int GetPoints();
 
-    }
+    public abstract string WriteFile();
+
+    public abstract void DisplayGoal();
+
+    public abstract void RecordEvent();
 
 
 }
