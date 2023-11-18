@@ -1,19 +1,12 @@
 class EternalGoal : Goal{
-    private int _possiblePoints;
-    private int _earnedPoints;
 
-    public EternalGoal(string name, string description, int possiblePoints) :base(name, description){
-        _possiblePoints = possiblePoints;
+    private EternalGoal(string name, string description, int possiblePoints) :base(name, description, possiblePoints){
+    
     }
 
-    public EternalGoal(string name, string description, int possiblePoints, int earnedPoints) :base(name, description){
-        _possiblePoints = possiblePoints;
-        _earnedPoints = earnedPoints;
-    }
+    private EternalGoal(string name, string description, int possiblePoints, int earnedPoints) :base(name, description, possiblePoints,
+     earnedPoints){
 
-    public override void DisplayGoal(){
-
-        Console.WriteLine($"[ ] {_name} ({_description})");
     }
 
     public static EternalGoal CreateEternalGoal(){
@@ -24,6 +17,8 @@ class EternalGoal : Goal{
         string name = Console.ReadLine();
         Console.Write("What is a short description of it? ");
         string description = Console.ReadLine();
+
+        // loops until an integer is entered.
         while(notInt){
             try{
                 Console.Write("What is the amount of points associated with this goal? ");
@@ -39,12 +34,16 @@ class EternalGoal : Goal{
         return goal;
     }
 
-    public override int GetPoints(){
-        return _earnedPoints;
+    public override void GetGoal(){
+        Console.WriteLine($"[ ] {_name} ({_description})");
     }
 
     public override void RecordEvent(){
         _earnedPoints += _possiblePoints;
+    }
+
+    public override int GetPoints(){
+        return _earnedPoints;
     }
 
     public override string WriteFile(){

@@ -1,28 +1,13 @@
 class SimpleGoal: Goal{
-    private int _possiblePoints;
-    private int _earnedPoints;
     private bool _isComplete;
 
-    public SimpleGoal(string name, string description, int possiblePoints) :base(name, description){
-        _possiblePoints = possiblePoints;
+    private SimpleGoal(string name, string description, int possiblePoints) :base(name, description, possiblePoints){
         _isComplete = false;
     }
 
-    public SimpleGoal(bool isComplete, string name, string description, int possiblePoints, int earnedPoints) :base(name, description){
+    private SimpleGoal(bool isComplete, string name, string description, int possiblePoints, int earnedPoints) 
+     :base(name, description, possiblePoints, earnedPoints){
         _isComplete = isComplete;
-        _possiblePoints = possiblePoints;
-        _earnedPoints = earnedPoints;
-    }
-
-    public override void DisplayGoal(){
-        string status;
-        if(_isComplete){
-            status = "X";
-        } else {
-            status = " ";
-        }
-
-        Console.WriteLine($"[{status}] {_name} ({_description})");
     }
 
     public static SimpleGoal CreateSimpleGoal(){
@@ -33,6 +18,8 @@ class SimpleGoal: Goal{
         string name = Console.ReadLine();
         Console.Write("What is a short description of it? ");
         string description = Console.ReadLine();
+
+        // loops until an integer is entered.
         while(notInt){
             try{
                 Console.Write("What is the amount of points associated with this goal? ");
@@ -48,13 +35,26 @@ class SimpleGoal: Goal{
         return goal;
     }
 
-    public override int GetPoints(){
-        return _earnedPoints;
+    public override void GetGoal(){
+        string status;
+
+        // marks an X if the goal has been completed
+        if(_isComplete){
+            status = "X";
+        } else {
+            status = " ";
+        }
+
+        Console.WriteLine($"[{status}] {_name} ({_description})");
     }
 
     public override void RecordEvent(){
         _earnedPoints += _possiblePoints;
         _isComplete = true;
+    }
+
+    public override int GetPoints(){
+        return _earnedPoints;
     }
 
     public override string WriteFile(){

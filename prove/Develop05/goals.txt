@@ -1,3 +1,9 @@
-810
-Checklist Goal~False~r~r~5~0~5~0~5
-Simple Goal~True~1~1~1~1
+// Deleted Points:
+210
+// Goals List:
+Eternal Goal~pray~pray every day in the morning and night~30~0
+Checklist Goal~False~10 pushups~do 10 pushups every day for a month~10~10~1000~1~31
+Eternal Goal~read scriptures~read for 10 mins every day~40~80
+Checklist Goal~False~eat pizza~eat pizza every day for a year~100~100~100000~1~365
+Eternal Goal~Go to temple~go to temple once a week~500~0
+Checklist Goal~False~memorize scriptures~memorize 3 scriptures~50~0~500~0~3
