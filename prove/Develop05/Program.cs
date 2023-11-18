@@ -1,9 +1,9 @@
 using System;
 using System.IO; 
 
-// I spent a lot of time on this assignment to make sure that it is bug proof if the user enters in an incorrect value. I commented some of
-// the more confusing parts of code. I added a remove option that will remove a goal from the list, but also saves any points that were
-// associated with that goal. I added a feature to make sure that the user saved their data if they want to. 
+// I spent a lot of time on this assignment to make sure that it is bug-proof if the user enters an incorrect value. I commented on some of
+// the more confusing parts of code. I added a remove option that will remove a goal from the list but also save any points that were
+// associated with that goal. I added a feature to make sure that the user saves their data if they want to. 
 
 class Program
 {
