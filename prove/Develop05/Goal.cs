@@ -21,7 +21,9 @@ abstract class Goal{
         Console.WriteLine(_name);
     }
 
-    public abstract int GetPoints();
+    public int GetPoints(){
+        return _earnedPoints;
+    }
 
     public abstract string WriteFile();
 

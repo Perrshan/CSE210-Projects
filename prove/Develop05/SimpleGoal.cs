@@ -53,10 +53,6 @@ class SimpleGoal: Goal{
         _isComplete = true;
     }
 
-    public override int GetPoints(){
-        return _earnedPoints;
-    }
-
     public override string WriteFile(){
         string line = $"Simple Goal~{_isComplete}~{_name}~{_description}~{_possiblePoints}~{_earnedPoints}";
         return line;

@@ -42,10 +42,6 @@ class EternalGoal : Goal{
         _earnedPoints += _possiblePoints;
     }
 
-    public override int GetPoints(){
-        return _earnedPoints;
-    }
-
     public override string WriteFile(){
         string line = $"Eternal Goal~{_name}~{_description}~{_possiblePoints}~{_earnedPoints}";
         return line;

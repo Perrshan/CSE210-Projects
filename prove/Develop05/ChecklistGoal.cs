@@ -89,10 +89,6 @@ class ChecklistGoal: Goal{
         }
     }
 
-    public override int GetPoints(){
-        return _earnedPoints;
-    }
-
     public override string WriteFile(){
         string line = $"Checklist Goal~{_isComplete}~{_name}~{_description}~{_possiblePoints}~{_earnedPoints}~{_bonusPoints}~"
         + $"{_timesCompleted}~{_totalTimes}";
