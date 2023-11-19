@@ -262,7 +262,7 @@ class Program
                     if(done){
                         Console.WriteLine("“I am so thoroughly convinced that if we don't set goals in our life and learn how to master the"
                         + " techniques of living to reach our goals, we can reach a ripe old age and look back on our life only to see that" 
-                        + "we reached but a small part of our full potential.");
+                        + " we reached but a small part of our full potential.");
                         Console.WriteLine("~President Ballard");
                     }
                     break;
