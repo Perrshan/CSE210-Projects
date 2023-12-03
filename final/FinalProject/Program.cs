@@ -52,7 +52,7 @@ class Program
         var budgetThing = new Budget();
 
         var expense1 = new NormalExpense("gas", 80);
-        var expense2 = new FixedExpense("gas", 600);
+        var expense2 = new FixedExpense("tithing", 400);
 
         var budget1 = new Budget("ur mom", 100);
         var budget2 = new Budget("ur mom", 100);
@@ -82,15 +82,11 @@ class Program
                 totalIncome += incomeThing.GetIncome();
             }
 
-            Console.WriteLine(totalExpenses);
-            Console.WriteLine(totalBudget);
-            Console.WriteLine(totalIncome);
-
             budgetThing.CheckBudget(totalExpenses > totalBudget);
 
             double leftOver = totalIncome - totalExpenses;
-
-            Console.WriteLine($"Left over Income: {leftOver}");
+            
+            Console.WriteLine(totalExpenses);
             DisplayMenu();
             string menuResponse = Console.ReadLine();
 
@@ -104,12 +100,33 @@ class Program
                     string expenseType = Console.ReadLine();
                     switch(expenseType){
                         case "1":
-                            var expense = new RecordExpense
+                            // create a new normal expense
                         break;
                         case "2":
-                            foreach(Expense expense in expenses){
-                                if(expense.ToString() == "FixedExpense"){
-                                    Console.WriteLine(expense);
+                            int i = 0;
+                            foreach(Expense fixedExpense in expenses){
+                                if(fixedExpense.ToString() == "FixedExpense"){
+                                    i++;
+                                    Console.Write($"{i}. ");
+                                    Console.WriteLine(fixedExpense.GetTypeString());
+                                }
+                            }
+                            i++;
+                            Console.WriteLine($"{i}. New Fixed Expense");
+
+                            Console.WriteLine($"Please choose one of the fixed expense options or enter '{i}' to add a new fixed expense. ");
+                            int choice = int.Parse(Console.ReadLine());
+                            if(choice == i){
+                                // create new fixed value
+                            } else {
+                                foreach(Expense fixedExpense in expenses){
+                                    int j = 0;
+                                    if(fixedExpense.ToString() == "FixedExpense"){
+                                        j++;
+                                        if(j == i){
+                                            totalExpenses += fixedExpense.GetAmount();
+                                        }
+                                    }
                                 }
                             }
                         break;
@@ -118,10 +135,13 @@ class Program
                         break;
                     }
                 break;
+                // record income
                 case "3":
                 break;
+                // check budget
                 case "4":
                 break;
+                
                 case "5":
                 break;
                 default:

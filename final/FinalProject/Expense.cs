@@ -11,6 +11,10 @@ class Expense {
         return _amount;
     }
 
+    public string GetTypeString(){
+        return _type;
+    }
+
 
 
 }
