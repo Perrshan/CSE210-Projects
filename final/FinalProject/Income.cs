@@ -1,23 +1,33 @@
 class Income {
     
-    private double _income;
+    private double _amount;
 
-    public Income (double income){
-        _income = income;
+    public List<Income> incomeList = new List<Income>();
+
+    public Income (double amount){
+        _amount = amount;
     }
 
     public Income (){
 
     }
 
-    public void SetIncome(double income){
-        _income = income;
+    public void SetIncome(){
+        Console.Write("What is the amount of your income? ");
+        _amount = double.Parse(Console.ReadLine());
     }
 
     public double GetIncome(){
-        return _income;
+        return _amount;
     }
 
+    public double GetTotal(){
+        double total = 0;
+        foreach(Income income in incomeList){
+            total += _amount;
+        }
+        return total;
+    }
     
 
     

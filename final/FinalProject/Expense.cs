@@ -1,18 +1,42 @@
 class Expense {
-    protected string _type;
+    protected string _name;
     protected double _amount;
 
-    public Expense (string type, double amount){
-        _type = type;
+    public List<Expense> expenses = new List<Expense>();
+
+    public Expense (string name, double amount){
+        _name = name;
         _amount = amount;
+    }
+
+    public Expense (){
+
     }
 
     public double GetAmount(){
         return _amount;
     }
 
-    public string GetTypeString(){
-        return _type;
+    public void SetName(){
+        Console.Write("What is the name of the expense? ");
+        _name = Console.ReadLine();
+    }
+
+    public virtual void SetAmount(){
+        Console.Write("What is the amount of the expense? ");
+        _amount = double.Parse(Console.ReadLine());
+    }
+
+    public virtual double GetTotal(){
+        return 0;
+    }
+
+    public virtual void AddToTotal(){
+
+    }
+
+    public string GetName(){
+        return _name;
     }
 
 
