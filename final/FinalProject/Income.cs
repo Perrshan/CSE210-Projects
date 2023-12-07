@@ -24,7 +24,7 @@ class Income {
     public double GetTotal(){
         double total = 0;
         foreach(Income income in incomeList){
-            total += _amount;
+            total += income._amount;
         }
         return total;
     }

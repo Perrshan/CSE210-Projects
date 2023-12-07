@@ -1,12 +1,13 @@
-class FixedExpense : Expense {
+class FixedExpenses : Expense {
 
-    private double _total;
+    public double _total;
+    public List<FixedExpenses> fixedExpensesList = new List<FixedExpenses>();
 
-    public FixedExpense(string name, double amount) :base(name, amount){
+    public FixedExpenses(string name, double amount) :base(name, amount){
         _total = amount;
     }
 
-    public FixedExpense(){
+    public FixedExpenses(){
         
     }
 
@@ -25,8 +26,8 @@ class FixedExpense : Expense {
     public override double GetTotal()
     {
         double total = 0;
-        foreach(Expense expense in expenses){
-            total += _total;
+        foreach(FixedExpenses expense in fixedExpensesList){
+            total += expense._total;
         }
         return total;
     }

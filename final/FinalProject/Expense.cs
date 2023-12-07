@@ -2,11 +2,13 @@ class Expense {
     protected string _name;
     protected double _amount;
 
-    public List<Expense> expenses = new List<Expense>();
-
     public Expense (string name, double amount){
         _name = name;
         _amount = amount;
+    }
+
+    public Expense(string name){
+        _name = name;
     }
 
     public Expense (){

@@ -1,18 +1,20 @@
-class NormalExpense : Expense {
+class NormalExpenses : Expense {
+
+    public List<NormalExpenses> normalExpensesList = new List<NormalExpenses>();
     
-    public NormalExpense(string type, double amount) :base(type, amount){
+    public NormalExpenses(string name) :base(name){
         
     }
 
-    public NormalExpense(){
+    public NormalExpenses(){
         
     }
 
     public override double GetTotal()
     {
         double total = 0;
-        foreach(Expense expense in expenses){
-            total += _amount;
+        foreach(NormalExpenses expense in normalExpensesList){
+            total += expense._amount;
         }
         return total;
     }

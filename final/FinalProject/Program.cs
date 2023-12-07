@@ -27,91 +27,76 @@ class Program
             Console.Write("Select a choice from the menu: ");
         }
 
-        // Budgeting Program/ banking program
-        // Enter in a budget
-        // Also enter the income that has been earned and show how much money was saved for that pay period. It will ask if you've paid tithing.
-        // Expense/ income.
-        // description, amount, 
-        // divide the budget into the seperate categories to see which subbudgets went over the amount they should have.Be able to adjust individual budgets incase it is failed frequently.
-        // Display total amount of money spent compared to the budget
-        // Display amounts of money per category of spending
-        // Writes and Reads data into the system.
-        // Divide the data by month and year and have a way to compare previous months data to current data.
-        // Be able to edit previous datas numbers incase there were any mistakes.
-        // Grocery, Dates, Gas, Tithing, Investments(School), Medical, Pet, Miscelenous
-        // Include which day it was purchased
-
         bool done = false;
         int i;
+        int choice;
 
-        var normalExpense = new NormalExpense();
-        var fixedExpense = new FixedExpense();
-        var budget = new Budget();
+        var normalExpenses = new NormalExpenses();
+        var fixedExpenses = new FixedExpenses();
+        var budget = new Budgets();
         var income = new Income();
 
-        /*
-        normalExpense.SetName();
-        normalExpense.SetAmount();
-        normalExpense.expenses.Add(normalExpense);
-    
-        fixedExpense.SetName();
-        fixedExpense.SetAmount();
-        fixedExpense.expenses.Add(fixedExpense);
-
-        budget.SetName();
-        budget.SetAmount();
-        budget.budgets.Add(budget);
-
-        income.SetIncome();
-        income.incomeList.Add(income);
-
-        Console.WriteLine(normalExpense.GetTotal());
-        Console.WriteLine(fixedExpense.GetTotal());
-        Console.WriteLine(budget.GetTotal());
-        Console.WriteLine(income.GetTotal());
-
-        */
-
         while(!done){
-            Console.WriteLine(fixedExpense.GetTotal());
-            
+            Console.WriteLine(fixedExpenses.GetTotal() + normalExpenses.GetTotal());
+            Console.WriteLine(income.GetTotal());
+            Console.WriteLine(budget.GetTotal());
             DisplayMenu();
             string menuResponse = Console.ReadLine();
 
             switch(menuResponse){
                 case "1":
-                    budget = Budget.CreateBudget();
-                    budget.budgets.Add(budget);
+                    var newbudget = Budgets.CreateBudget();
+                    budget.budgets.Add(newbudget);
                 break;
                 case "2":
                     DisplayExpenseType();
                     string expenseType = Console.ReadLine();
                     switch(expenseType){
                         case "1":
-                            // create a new normal expense
+                            i = 0;
+                            foreach(Budgets budgetName in budget.budgets){
+                                i++;
+                                Console.Write($"\t{i}. ");
+                                Console.WriteLine(budgetName.GetName());
+                            }
+                            i++;
+                            Console.WriteLine($"\t{i}. New Budget");
+                            Console.WriteLine($"Please choose one of the budget options that the expense falls under or enter '{i}' to add a new budget. ");
+                            choice =int.Parse(Console.ReadLine());
+                            if(choice == i){
+                                var newExpenseBudget = Budgets.CreateBudget();
+                                budget.budgets.Add(newExpenseBudget);
+                            }
+                            Console.WriteLine(choice-1);
+                            var newNormalExpense = new NormalExpenses(budget.budgets[choice-1].GetName());
+                            // add new normal expense and adds to list
+                            newNormalExpense.SetAmount();
+                            normalExpenses.normalExpensesList.Add(newNormalExpense);
+
                         break;
                         case "2":
 
                             i = 0;
-                            foreach(Expense expense in fixedExpense.expenses){
+                            foreach(Expense expense in fixedExpenses.fixedExpensesList){
                                 i++;
-                                Console.Write($"{i}. ");
-                                Console.WriteLine(fixedExpense.GetName());
+                                Console.Write($"\t{i}. ");
+                                Console.WriteLine(expense.GetName());
                             }
                             i++;
-                            Console.WriteLine($"{i}. New Fixed Expense");
+                            Console.WriteLine($"\t{i}. New Fixed Expense");
 
                             Console.WriteLine($"Please choose one of the fixed expense options or enter '{i}' to add a new fixed expense. ");
-                            int choice = int.Parse(Console.ReadLine());
+                            choice = int.Parse(Console.ReadLine());
                             if(choice == i){
-                                // add new fixed response and adds to list
-                                fixedExpense.SetName();
-                                fixedExpense.SetAmount();
-                                fixedExpense.expenses.Add(fixedExpense);
+                                var newFixedExpense = new FixedExpenses();
+                                // add new fixed expense and adds to list
+                                newFixedExpense.SetName();
+                                newFixedExpense.SetAmount();
+                                fixedExpenses.fixedExpensesList.Add(newFixedExpense);
 
                             } else {
                                 // increase the total times that the fixed amount has been used.
-                                fixedExpense.expenses[choice-1].AddToTotal();
+                                fixedExpenses.fixedExpensesList[choice-1].AddToTotal();
                             }
                         break;
 
@@ -120,8 +105,12 @@ class Program
                         break;
                     }
                 break;
+
                 // record income
                 case "3":
+                    var newIncome = new Income();
+                    newIncome.SetIncome();
+                    income.incomeList.Add(newIncome);
                 break;
                 // check budget
                 case "4":
