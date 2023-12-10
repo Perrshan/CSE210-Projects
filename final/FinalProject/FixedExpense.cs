@@ -13,7 +13,7 @@ class FixedExpenses : Expense {
 
     public override void SetAmount()
     {
-        Console.Write("What is the amount of the expense? ");
+        Console.Write("What is the amount of the expense? $");
         double value = double.Parse(Console.ReadLine());
         _amount = value;
         _total = value;

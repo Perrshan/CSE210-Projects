@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Schema;
 
 class Program
 {
@@ -11,8 +12,8 @@ class Program
             Console.WriteLine("\t2: Record Expense");
             Console.WriteLine("\t3: Record Income");
             Console.WriteLine("\t4: Check Budget");
-            Console.WriteLine("\t5: Load Goals");
-            Console.WriteLine("\t6: Record Event");
+            Console.WriteLine("\t5: Check Savings");
+            Console.WriteLine("\t6: Edit Entries");
             Console.WriteLine("\t7: Quit");
 
             Console.Write("Select a choice from the menu: ");
@@ -27,6 +28,29 @@ class Program
             Console.Write("Select a choice from the menu: ");
         }
 
+        static void DisplayEditList()
+        {
+            Console.WriteLine("What do you need to edit? ");
+            Console.WriteLine("\t1: Budget");
+            Console.WriteLine("\t2: Expense");
+            Console.WriteLine("\t3: Income");
+
+            Console.Write("Select a choice from the menu: ");
+        }
+
+        static void DisplayRemoveOrChange(string type)
+        {
+            string article = "a";
+            if(type == "Income" || type == "Expense"){
+                article = "an";
+            }
+            Console.WriteLine($"Do you need to remove or change {article} {type}? ");
+            Console.WriteLine($"\t1. Remove {type}");
+            Console.WriteLine($"\t2. Change {type}");
+
+            Console.Write("Select a choice from the menu: ");
+        }
+
         bool done = false;
         int i;
         int choice;
@@ -37,9 +61,6 @@ class Program
         var income = new Income();
 
         while(!done){
-            Console.WriteLine(fixedExpenses.GetTotal() + normalExpenses.GetTotal());
-            Console.WriteLine(income.GetTotal());
-            Console.WriteLine(budget.GetTotal());
             DisplayMenu();
             string menuResponse = Console.ReadLine();
 
@@ -112,11 +133,52 @@ class Program
                     newIncome.SetIncome();
                     income.incomeList.Add(newIncome);
                 break;
+
                 // check budget
                 case "4":
+                foreach(Budgets budgetCategory in budget.budgets){
+                    double total = 0;
+                    foreach(NormalExpenses normalExpenses1 in normalExpenses.normalExpensesList){
+                        if(budgetCategory.GetName() == normalExpenses1.GetName()){
+                            total += normalExpenses1.GetAmount();
+                        }
+                    }
+                    Console.WriteLine($"{budgetCategory.GetName()} Total Budget: ${budgetCategory.GetAmount()}");
+                    Console.WriteLine($"Balance: ${budgetCategory.GetAmount() - total}");
+                    Console.WriteLine();
+                }
                 break;
                 
+                // check savings
                 case "5":
+                    Console.WriteLine($"Total Income: ${income.GetTotal()}");
+                    Console.WriteLine($"Total Expenses: ${normalExpenses.GetTotal() + fixedExpenses.GetTotal()}");
+                    Console.WriteLine($"Balance: ${income.GetTotal() - (normalExpenses.GetTotal() + fixedExpenses.GetTotal())}");
+                break;
+
+                // Edit Entries
+                case "6":
+                    DisplayEditList();
+                    string editType = Console.ReadLine();
+                    switch(editType){
+                        // edit budget
+                        case "1":
+                            DisplayRemoveOrChange("Budget");
+                        break;
+
+                        // edit expense
+                        case "2":
+                            DisplayRemoveOrChange("Expense");
+                        break;
+
+                        // edit income
+                        case "3":
+                            DisplayRemoveOrChange("Income");
+                        break;
+                    }
+
+
+
                 break;
                 default:
                     Console.WriteLine("Invalid Entry.");

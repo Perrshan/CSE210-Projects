@@ -25,7 +25,7 @@ class Budgets {
     }
 
     public void SetAmount(){
-        Console.Write("What is the amount of the budget? ");
+        Console.Write("What is the amount of the budget? $");
         _amount = double.Parse(Console.ReadLine());
     }
 
@@ -44,7 +44,7 @@ class Budgets {
     public static Budgets CreateBudget(){
         Console.Write("What is the name of the budget? ");
         string name = Console.ReadLine();
-        Console.Write("What is the amount of the budget? ");
+        Console.Write("What is the amount of the budget? $");
         double amount = double.Parse(Console.ReadLine());
 
         var budget = new Budgets(name, amount); 

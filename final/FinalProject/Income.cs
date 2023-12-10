@@ -13,7 +13,7 @@ class Income {
     }
 
     public void SetIncome(){
-        Console.Write("What is the amount of your income? ");
+        Console.Write("What is the amount of your income? $");
         _amount = double.Parse(Console.ReadLine());
     }
 

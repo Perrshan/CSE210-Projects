@@ -25,7 +25,7 @@ class Expense {
     }
 
     public virtual void SetAmount(){
-        Console.Write("What is the amount of the expense? ");
+        Console.Write("What is the amount of the expense? $");
         _amount = double.Parse(Console.ReadLine());
     }
 
