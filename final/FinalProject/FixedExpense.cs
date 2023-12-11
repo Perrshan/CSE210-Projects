@@ -3,8 +3,8 @@ class FixedExpenses : Expense {
     public double _total;
     public List<FixedExpenses> fixedExpensesList = new List<FixedExpenses>();
 
-    public FixedExpenses(string name, double amount) :base(name, amount){
-        _total = amount;
+    public FixedExpenses(string name, double amount, double total) :base(name, amount){
+        _total = total;
     }
 
     public FixedExpenses(){
@@ -30,6 +30,17 @@ class FixedExpenses : Expense {
             total += expense._total;
         }
         return total;
+    }
+
+    public override string WriteFile()
+    {
+        string file = $"FE~{_name}~{_amount}~{_total}";
+        return file;
+    }
+
+    public FixedExpenses ReadFixedExpense(string name, double amount, double total){
+        var expense = new FixedExpenses(name, amount, total);
+        return expense;
     }
 
 }

@@ -1,14 +1,12 @@
 class Budgets {
     private string _name;
     private double _amount;
-    private bool _isOverBudget;
 
     public List<Budgets> budgets = new List<Budgets>();
 
     public Budgets(string name, double amount){
         _name = name;
         _amount = amount;
-        _isOverBudget = false;
     }
 
     public Budgets(){
@@ -33,14 +31,6 @@ class Budgets {
         return _amount;
     }
 
-    public void CheckBudget(bool isOver){
-        _isOverBudget = isOver;
-
-        if(_isOverBudget){
-            Console.WriteLine("its over my guy");
-        }
-    }
-
     public static Budgets CreateBudget(){
         Console.Write("What is the name of the budget? ");
         string name = Console.ReadLine();
@@ -48,8 +38,7 @@ class Budgets {
         double amount = double.Parse(Console.ReadLine());
 
         var budget = new Budgets(name, amount); 
-        return budget;
-        
+        return budget;  
     }
 
     public double GetTotal(){
@@ -58,6 +47,16 @@ class Budgets {
             total += budget._amount;
         }
         return total;
+    }
+
+    public string WriteFile(){
+        string file = $"B~{_name}~{_amount}";
+        return file;
+    }
+
+    public Budgets ReadBudget(string name, double amount){
+        var budget = new Budgets(name, amount);
+        return budget;
     }
 
 

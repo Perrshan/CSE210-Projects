@@ -41,6 +41,9 @@ class Expense {
         return _name;
     }
 
-
+    public virtual string WriteFile(){
+        string file = $"NE~{_name}~{_amount}";
+        return file;
+    }
 
 }
