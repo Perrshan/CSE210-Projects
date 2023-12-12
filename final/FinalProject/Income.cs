@@ -5,7 +5,7 @@ class Income {
 
     public List<Income> incomeList = new List<Income>();
 
-    public Income (double amount, DateTime date){
+    private Income (double amount, DateTime date){
         _amount = amount;
         _date = date;
     }
@@ -17,9 +17,6 @@ class Income {
     public void SetIncome(){
         Console.Write("What is the amount of your income? $");
         _amount = double.Parse(Console.ReadLine());
-    }
-
-    public void SetDate(){
         _date = DateTime.Now;
     }
 

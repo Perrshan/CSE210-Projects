@@ -74,6 +74,7 @@ class Program
         string response;
         string filename;
 
+        // initilize classes
         var normalExpenses = new NormalExpenses();
         var fixedExpenses = new FixedExpenses();
         var edit = new Edit();
@@ -87,11 +88,13 @@ class Program
             string menuResponse = Console.ReadLine();
 
             switch(menuResponse){
+
+                // create budget
                 case "1":
                     Console.Clear();
                     try{
-                    var newbudget = Budgets.CreateBudget();
-                    budget.budgets.Add(newbudget);
+                        var newbudget = Budgets.CreateBudget();
+                        budget.budgets.Add(newbudget);
                     } catch (FormatException) {
                         Console.Clear();
                         Console.WriteLine("New Budget Deleted");
@@ -99,28 +102,33 @@ class Program
                         wait(2000);
                     }
                 break;
+
+                // create expense
                 case "2":
                     Console.Clear();
                     DisplayExpenseType();
                     string expenseType = Console.ReadLine();
                     switch(expenseType){
+
+                        // create normal expense
                         case "1":
                             i = 0;
-                            foreach(Budgets budgetName in budget.budgets){
-                                i++;
-                                Console.Write($"\t{i}. ");
-                                Console.WriteLine(budgetName.GetName());
-                            }
-                            i++;
-                            Console.WriteLine($"\t{i}. New Budget");
-
                             try{
-                            Console.Write($"Please choose one of the budget options that the expense falls under or enter '{i}' to add a new budget: ");
-                            choice =int.Parse(Console.ReadLine());
-                            if(choice == i){
-                                var newExpenseBudget = Budgets.CreateBudget();
-                                budget.budgets.Add(newExpenseBudget);
-                            }
+
+                                // prints out all budgets because normal expenses need to be named the same name as a budget
+                                foreach(Budgets budgetName in budget.budgets){
+                                    i++;
+                                    Console.Write($"\t{i}. ");
+                                    Console.WriteLine(budgetName.GetName());
+                                }
+                                i++;
+                                Console.WriteLine($"\t{i}. New Budget");
+                                Console.Write($"Please choose one of the budget options that the expense falls under or enter '{i}' to add a new budget: ");
+                                choice =int.Parse(Console.ReadLine());
+                                if(choice == i){
+                                    var newExpenseBudget = Budgets.CreateBudget();
+                                    budget.budgets.Add(newExpenseBudget);
+                                }
                             } catch (FormatException){
                                 Console.Clear();
                                 Console.WriteLine("New Budget Deleted. ");
@@ -130,10 +138,10 @@ class Program
                             }
                             
                             try{
-                            var newNormalExpense = new NormalExpenses(budget.budgets[choice-1].GetName());
-                            // add new normal expense and adds to list
-                            newNormalExpense.SetAmount();
-                            normalExpenses.normalExpensesList.Add(newNormalExpense);
+                                var newNormalExpense = new NormalExpenses(budget.budgets[choice-1].GetName());
+                                // add new normal expense and adds to list
+                                newNormalExpense.SetAmount();
+                                normalExpenses.normalExpensesList.Add(newNormalExpense);
                             } catch (FormatException) {
                                 Console.Clear();
                                 Console.WriteLine("New Expense Deleted. ");
@@ -148,31 +156,30 @@ class Program
 
                         break;
 
+                        // create fixed expense
                         case "2":
                             i = 0;
-                            foreach(Expense expense in fixedExpenses.fixedExpensesList){
-                                i++;
-                                Console.Write($"\t{i}. ");
-                                Console.WriteLine(expense.GetName());
-                            }
-                            i++;
-                            Console.WriteLine($"\t{i}. New Fixed Expense");
-
                             try{
+                                foreach(Expense expense in fixedExpenses.fixedExpensesList){
+                                    i++;
+                                    Console.Write($"\t{i}. ");
+                                    Console.WriteLine(expense.GetName());
+                                }
+                                i++;
+                                Console.WriteLine($"\t{i}. New Fixed Expense");
+                                Console.Write($"Please choose one of the fixed expense options or enter '{i}' to add a new fixed expense: ");
+                                choice = int.Parse(Console.ReadLine());
+                                if(choice == i){
+                                    var newFixedExpense = new FixedExpenses();
+                                    // add new fixed expense and adds to list
+                                    newFixedExpense.SetName();
+                                    newFixedExpense.SetAmount();
+                                    fixedExpenses.fixedExpensesList.Add(newFixedExpense);
 
-                            Console.Write($"Please choose one of the fixed expense options or enter '{i}' to add a new fixed expense: ");
-                            choice = int.Parse(Console.ReadLine());
-                            if(choice == i){
-                                var newFixedExpense = new FixedExpenses();
-                                // add new fixed expense and adds to list
-                                newFixedExpense.SetName();
-                                newFixedExpense.SetAmount();
-                                fixedExpenses.fixedExpensesList.Add(newFixedExpense);
-
-                            } else {
-                                // increase the total times that the fixed amount has been used.
-                                fixedExpenses.fixedExpensesList[choice-1].AddToTotal();
-                            }
+                                } else {
+                                    // increase the total times that the fixed amount has been used.
+                                    fixedExpenses.fixedExpensesList[choice-1].AddToTotal();
+                                }
 
                             } catch (FormatException) {
                                 Console.Clear();
@@ -194,14 +201,13 @@ class Program
                     }
                 break;
 
-                // record income
+                // create income
                 case "3":
                     Console.Clear();
                     try{
-                    var newIncome = new Income();
-                    newIncome.SetIncome();
-                    newIncome.SetDate();
-                    income.incomeList.Add(newIncome);
+                        var newIncome = new Income();
+                        newIncome.SetIncome();
+                        income.incomeList.Add(newIncome);
                     } catch (FormatException){
                         Console.Clear();
                         Console.WriteLine("New Income Deleted");
@@ -245,6 +251,7 @@ class Program
                     DisplayEditList();
                     string editType = Console.ReadLine();
                     switch(editType){
+
                         // edit budget
                         case "1":
                             response = DisplayRemoveOrChange("Budget");
@@ -264,23 +271,35 @@ class Program
                         case "2":
                             try{
                                 response = DisplayRemoveOrChange("Expense");
+
+                                // remove expense
                                 if(response == "1"){
                                     Console.Clear();
                                     DisplayExpenseType();
                                     response = Console.ReadLine();
+
+                                    // normal expense
                                     if(response == "1"){
                                         edit.RemoveNormalExpense(normalExpenses.normalExpensesList);
+                                    
+                                    // fixed expense
                                     } else if(response == "2") {
                                         edit.RemoveFixedExpense(fixedExpenses.fixedExpensesList);
                                     } else {
                                         DisplayErrorMessage();
                                     }
+                                
+                                // change expense
                                 } else if(response == "2") {
                                     Console.Clear();
                                     DisplayExpenseType();
                                     response = Console.ReadLine();
+
+                                    // normal expense
                                     if(response == "1"){
                                         edit.ChangeNormalExpense(normalExpenses.normalExpensesList);
+
+                                    // fixed expense
                                     } else if(response == "2"){
                                         edit.ChangeFixedExpense(fixedExpenses.fixedExpensesList);
                                     } else {
@@ -308,7 +327,6 @@ class Program
                                 response = DisplayRemoveOrChange("Income");
                                 if(response == "1"){
                                     edit.RemoveIncome(income.incomeList);
-
                                 } else if(response == "2") {
                                     edit.ChangeIncome(income.incomeList);
                                 } else {

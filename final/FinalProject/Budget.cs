@@ -4,7 +4,7 @@ class Budgets {
 
     public List<Budgets> budgets = new List<Budgets>();
 
-    public Budgets(string name, double amount){
+    private Budgets(string name, double amount){
         _name = name;
         _amount = amount;
     }
@@ -58,6 +58,4 @@ class Budgets {
         var budget = new Budgets(name, amount);
         return budget;
     }
-
-
 }

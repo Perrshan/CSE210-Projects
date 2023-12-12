@@ -1,9 +1,9 @@
 class FixedExpenses : Expense {
 
-    public double _total;
+    private double _total;
     public List<FixedExpenses> fixedExpensesList = new List<FixedExpenses>();
 
-    public FixedExpenses(string name, double amount, double total) :base(name, amount){
+    private FixedExpenses(string name, double amount, double total) :base(name, amount){
         _total = total;
     }
 
@@ -15,12 +15,12 @@ class FixedExpenses : Expense {
     {
         Console.Write("What is the amount of the expense? $");
         double value = double.Parse(Console.ReadLine());
-        _amount = value;
+        amount = value;
         _total = value;
     }
 
-    public override void AddToTotal(){
-        _total += _amount;
+    public void AddToTotal(){
+        _total += amount;
     }
 
     public override double GetTotal()
@@ -34,7 +34,7 @@ class FixedExpenses : Expense {
 
     public override string WriteFile()
     {
-        string file = $"FE~{_name}~{_amount}~{_total}";
+        string file = $"FE~{name}~{amount}~{_total}";
         return file;
     }
 

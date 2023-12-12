@@ -1,14 +1,14 @@
-class Expense {
-    protected string _name;
-    protected double _amount;
+abstract class Expense {
+    protected string name;
+    protected double amount;
 
-    public Expense (string name, double amount){
-        _name = name;
-        _amount = amount;
+    public Expense (string nameStr, double amountDb){
+        name = nameStr;
+        amount = amountDb;
     }
 
-    public Expense(string name){
-        _name = name;
+    public Expense(string nameStr){
+        name = nameStr;
     }
 
     public Expense (){
@@ -16,33 +16,27 @@ class Expense {
     }
 
     public double GetAmount(){
-        return _amount;
+        return amount;
     }
 
     public void SetName(){
         Console.Write("What is the name of the expense? ");
-        _name = Console.ReadLine();
+        name = Console.ReadLine();
     }
 
     public virtual void SetAmount(){
         Console.Write("What is the amount of the expense? $");
-        _amount = double.Parse(Console.ReadLine());
+        amount = double.Parse(Console.ReadLine());
     }
 
-    public virtual double GetTotal(){
-        return 0;
-    }
-
-    public virtual void AddToTotal(){
-
-    }
+    public abstract double GetTotal();
 
     public string GetName(){
-        return _name;
+        return name;
     }
 
     public virtual string WriteFile(){
-        string file = $"NE~{_name}~{_amount}";
+        string file = $"NE~{name}~{amount}";
         return file;
     }
 
